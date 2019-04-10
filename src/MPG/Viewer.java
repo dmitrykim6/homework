@@ -64,8 +64,6 @@ public class Viewer {
         resultButton.addActionListener(controller);
         resultButton.setActionCommand("calculate");
 
-
-
         frame.add(nameLabel);
         frame.add(litresLabel);
         frame.add(litresTextField);
@@ -85,6 +83,5 @@ public class Viewer {
     }
     public void update(String result){
         resultText.setText(result);
-
     }
 }
