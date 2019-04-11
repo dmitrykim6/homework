@@ -13,10 +13,14 @@ public class Viewer {
     JTextField litresTextField;
     JTextField kilometersTextField;
     JLabel resultText;
+    JFrame errFrame;
+    JLabel errMsg;
+
+
 
     Viewer(){
         Controller controller = new Controller(this);
-
+        // Main window
         JFrame frame = new JFrame("MPG");
         frame.setSize(300,300);
         frame.setLayout(null);
@@ -74,6 +78,49 @@ public class Viewer {
         frame.add(resetButton);
         frame.add(resultButton);
         frame.setVisible(true);
+
+        //Error window
+
+        errFrame = new JFrame("Error");
+        errFrame.setSize(250, 100);
+        errFrame.setLocationRelativeTo(null);
+        errFrame.setLayout(null);
+        errFrame.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+
+        errMsg = new JLabel("Input error!");
+        errMsg.setBounds(90, 0, 90, 40);
+        errMsg.setHorizontalTextPosition(SwingConstants.CENTER);
+
+        JButton errOkButton = new JButton("OK");
+        errOkButton.setSize(60, 40);
+        errOkButton.setBounds(95, 35, 60, 30);
+        errOkButton.addActionListener(controller);
+        errOkButton.setActionCommand("errOk");
+
+        errFrame.add(errMsg);
+        errFrame.add(errOkButton);
+        errFrame.setVisible(false);
+
+    }
+
+    public void errorFrame(int errCode){
+        switch (errCode) {
+            case 0: {
+                errMsg.setText("Liters is empty!");
+                errFrame.setVisible(true);
+                break;
+            }
+            case 1: {
+                errMsg.setText("Distance is empty!");
+                errFrame.setVisible(true);
+                break;
+            }
+            case 3: {
+                errMsg.setText("Input error!");
+                errFrame.setVisible(true);
+                break;
+            }
+        }
     }
 
     public void update(String litres, String kilometers){

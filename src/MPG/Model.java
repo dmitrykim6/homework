@@ -18,34 +18,36 @@ class Model {
 
     public void doAction(String value){
         if(value.equals("reset")){
-            System.out.println("reset");
             kilometers = "";
             litres = "";
             viewer.update(kilometers, litres);
             return;
         }else if(value.equals("calculate")){
-            System.out.println("calculate");
+
             kilometers = viewer.kilometersTextField.getText();
             litres = viewer.litresTextField.getText();
 
             Calculate(kilometers, litres);
-
-
+        }else if(value.equals("errOk")){
+            viewer.errFrame.setVisible(false);
         }
-
     }
 
     public void Calculate(String km, String lt){
-        double answer = 0.0;
-        double fielDouble = Double.parseDouble(lt);
-        double distanceDouble = Double.parseDouble(km);
-        answer = fielDouble / distanceDouble * 100;
-        answer = Math.round(answer * 100.0) / 100.0;
+            try {
+                double answer = 0.0;
+                double fielDouble = Double.parseDouble(lt);
+                double distanceDouble = Double.parseDouble(km);
+                answer = fielDouble / distanceDouble * 100;
+                answer = Math.round(answer * 100.0) / 100.0;
 
-        showResult = String.valueOf(answer);
+                showResult = String.valueOf(answer);
 
-        viewer.update(showResult);
-        }
+                viewer.update(showResult);
+            }catch (NumberFormatException e){
 
+                viewer.errorFrame(3);
+            }
 
+    }
 }
