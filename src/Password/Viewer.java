@@ -1,6 +1,5 @@
 package Password;
 
-import javafx.scene.control.ButtonType;
 
 import javax.swing.JPasswordField;
 import javax.swing.JFrame;
